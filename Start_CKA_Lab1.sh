@@ -69,12 +69,11 @@ case "$ANS" in
    ;;
    "no") clear;
 	 echo -e "\n\n"
-	 #echo -e "OK! we will wait... \n";
 	 echo -e "${BOLD}${CYAN}OK! we will wait...${NONE} \n";
 	 sleep 3;
 	 labcaseifno;
    ;;
-   *) #clear;
+   *) clear;
       echo "Sorry, please provide a valide input! or exit to next question or ctrl+c to quit this Lab";
    ;;
   esac
