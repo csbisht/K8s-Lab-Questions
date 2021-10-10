@@ -1,0 +1,3 @@
+Q3) Create deployment called web-c1 on cluster1 and deployment called web-c2 on cluster2 and deployment called web-c3 on cluster3, 
+    with image nginx:1.16 and replica=1. Next upgrade the deployment to version 1.17 using rolling update and then scale it to 
+    replica=3. Make sure the version upgrade is recorded in the resource annotation.

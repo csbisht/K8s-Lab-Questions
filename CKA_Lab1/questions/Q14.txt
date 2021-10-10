@@ -1,0 +1,2 @@
+Q14) Expose the "audit-web-app" web pod as service "audit-web-app-svc" application on port 30002 
+     on the nodes on the each clusters (cluster1..3) and the web application listens on port 8080

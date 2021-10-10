@@ -1,0 +1,2 @@
+Q11) A new application finance-audit-pod is deployed in namespace finance of each clusters (cluster1..3). 
+     There is something wrong with it. Identify and fix the issue.

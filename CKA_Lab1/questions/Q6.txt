@@ -1,0 +1,3 @@
+Q6) Create a static pod on node0 on each clusters (cluster1..3) called static-nginx with image nginx and 
+    it should be recreated/restarted automatically in case of failure.
+

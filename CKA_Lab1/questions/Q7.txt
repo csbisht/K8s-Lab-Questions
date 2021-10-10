@@ -1,0 +1,9 @@
+Q7) Create a pod called pod-multi on each clusters (cluster1..3) with two containers as description below:-
+    container1:-
+    name=nginx
+    image=nginx
+
+    container2:-
+    name=busybox
+    image=busybox
+    command: sleep 5800

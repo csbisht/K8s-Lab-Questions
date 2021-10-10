@@ -1,0 +1,4 @@
+Q15) Create a pod only on cluster1 & cluster2 called nginx-dev using image=nginx and make sure that 
+     workloads are not scheduled to node node0.
+     Create another pod only on cluster3 called nginx-prod using image=nginx scheduled on node0 
+     Details: key:env_type, value: production, operator: Equal and effect: NoSchedule

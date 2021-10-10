@@ -1,0 +1,3 @@
+Q16) Create a pod called pod-sec on each clusters (cluster1..3), using below details:
+     securityContext: runAsUser: 1000 , fsGroup: 2000
+     image=redis:alpine

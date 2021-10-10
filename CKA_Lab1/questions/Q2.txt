@@ -1,0 +1,2 @@
+Q2) Three kubeconfig files called test1.kubeconfig, test2.kubeconfig and test3.kubeconfig has been created in /opt/K8sLab1 
+    and there is somthing wrong with the configuration. Troubleshoot and fix it.	

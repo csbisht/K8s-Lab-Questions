@@ -1,0 +1,11 @@
+Q19) A new user "test1" need to be created. Grant him access to the cluster1, user "test1" should have 
+     permission to create, list, get, update and delete pods in namespace space. The private key exists 
+     at location: $HOME/test1.key and csr at $HOME/test1.csr.
+	 
+     A new user "test2" need to be created. Grant him access to the cluster2, user "test2" should have 
+     permission to create, list, get, update and delete pods in namespace space. The private key exists 
+     at location: $HOME/test2.key and csr at $HOME/test2.csr.
+	 
+     A new user "test3" need to be created. Grant him access to the cluster3, user "test3" should have 
+     permission to create, list, get, update and delete pods in namespace space. The private key exists 
+     at location: $HOME/test3.key and csr at $HOME/test3.csr.

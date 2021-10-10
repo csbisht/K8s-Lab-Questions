@@ -1,0 +1,15 @@
+Q20) Create a pod and mount the PersistentVolumeClaim on /log as below specifications:
+     Cluster1:-
+     pod: nginx-pvc-pod1, Image: nginx, Volume: pvc1-log, Volume Mount: /log
+     PV: pv1-log, Storage: 100Mi, Access Modes: ReadWriteMany, Host Path: /pv1/log, Reclaim Policy: Retain 
+     PVC: pvc1-log, Storage Request: 50Mi, Access Modes: ReadWriteMany
+     
+     Cluster2:-
+     pod: nginx-pvc-pod2, Image: nginx, Volume: pvc2-log, Volume Mount: /log
+     PV: pv2-log, Storage: 100Mi, Access Modes: ReadWriteMany, Host Path: /pv2/log, Reclaim Policy: Retain 
+     PVC: pvc2-log, Storage Request: 50Mi, Access Modes: ReadWriteMany
+     
+     Cluster1:-
+     pod: nginx-pvc-pod3, Image: nginx, Volume: pvc3-log, Volume Mount: /log
+     PV: pv3-log, Storage: 100Mi, Access Modes: ReadWriteMany, Host Path: /pv3/log, Reclaim Policy: Retain 
+     PVC: pvc3-log, Storage Request: 50Mi, Access Modes: ReadWriteMany
