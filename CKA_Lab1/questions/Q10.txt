@@ -1,4 +1,4 @@
 Q10) Get the node node0 of each clusters (cluster1..3) in JSON format and store it in a files on jump as below:-
-     node0 of cluster1:- /opt/K8sLab1/node0-cluster1.json 
-     node0 of cluster2:- /opt/K8sLab1/node0-cluster2.json 
-     node0 of cluster3:- /opt/K8sLab1/node0-cluster3.json 
+     node0 of cluster1:- /opt/K8sLab/Lab1/node0-cluster1.json 
+     node0 of cluster2:- /opt/K8sLab/Lab1/node0-cluster2.json 
+     node0 of cluster3:- /opt/K8sLab/Lab1/node0-cluster3.json 

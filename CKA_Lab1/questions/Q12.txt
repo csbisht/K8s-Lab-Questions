@@ -1,6 +1,6 @@
 Q12) Create a pod called web-app using image nginx on each clusters (cluster1..3) and expose it internally 
      with a service called web-app-svc. Check that you are able to lookup service and pod from within the cluster.
      Use image: busybox:1.28 for dns lookup and record results on jump as below:
-     cluster1:- /opt/K8sLab1/web-app-cluster1.pod 
-     cluster2:- /opt/K8sLab1/web-app-cluster2.pod 
-     cluster3:- /opt/K8sLab1/web-app-cluster3.pod
+     cluster1:- /opt/K8sLab/Lab1/web-app-cluster1.pod 
+     cluster2:- /opt/K8sLab/Lab1/web-app-cluster2.pod 
+     cluster3:- /opt/K8sLab/Lab1/web-app-cluster3.pod
