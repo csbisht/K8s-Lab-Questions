@@ -4,13 +4,13 @@ podname="admin-pod"
 sleeptime="3500"
 systime="SYS_TIME"
 
-check1=`/usr/bin/kubectl --kubeconfig=$HOME/K8s_Lab/kubeconfig/"$1".config get pod "$podname" -o jsonpath='{.spec.containers[*].command}' |grep -w "$sleeptime"`
+check1=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get pod "$podname" -o jsonpath='{.spec.containers[*].command}' |grep -w "$sleeptime"`
 out1="$?"
 
-check2=`/usr/bin/kubectl --kubeconfig=$HOME/K8s_Lab/kubeconfig/"$1".config get pod "$podname" -o jsonpath='{.spec.containers[*].securityContext.capabilities.add}' |grep -w "$systime"`
+check2=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get pod "$podname" -o jsonpath='{.spec.containers[*].securityContext.capabilities.add}' |grep -w "$systime"`
 out2="$?"
 
-checkpod=`/usr/bin/kubectl --kubeconfig=$HOME/K8s_Lab/kubeconfig/"$1".config get pod "$podname" |grep -w "$podname" 2>/dev/null`
+checkpod=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get pod "$podname" |grep -w "$podname" 2>/dev/null`
 out3="$?"
 
 if [ "${out3}" = 0 ]; then
