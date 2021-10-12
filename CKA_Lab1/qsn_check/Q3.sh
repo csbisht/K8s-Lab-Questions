@@ -13,21 +13,18 @@ out2="$?"
 checkreplica=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get pods |grep "${deploymentname}${clstnum}" |wc -l`
 
 checkdeployment=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get deployment "${deploymentname}""${clstnum}"`
-out3="$?"
+out4="$?"
 
-if [ "${out3}" = 0 ]; then
+if [ "${out4}" = 0 ]; then
 if [ "${out1}" -gt 0 ] && [ "${out2}" -gt 0 ]; then
 echo "rollout history or deploy image not found"
 out3="1"
-#elif [ "${checkreplica}" -lt 3 ]; then
-#echo "replicas not scaled to 3"	
-#out3="1"
-#else
+else
 #echo "rollout history or deploy image found or replicas scaled to 3"	
-fi
 if [ "${checkreplica}" -lt 3 ]; then
 echo "replicas not scaled to 3"
 out3="1"
+fi
 fi
 else
 echo "deployment "${deploymentname}""${clastnum}" not found on "$1""
