@@ -1,1 +1,5 @@
-Q5) Deploy a web-load-1 pod using image nginx:1.17 with label tier=web on cluster1, cluster2 and cluster3.
+Q5) Deploy a pod with image nginx:1.17 as description below:-
+    label: tier=web 
+    cluster1 pod: web-load-1
+    cluster2 pod: web-load-2
+    cluster3 pod: web-load-3
