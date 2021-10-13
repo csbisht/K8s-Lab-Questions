@@ -87,7 +87,7 @@ questionlst=( `ls $HOME/K8s-Lab-Questions/CKA_Lab1/questions` )
 labrun () {
 #clear
 echo -e "\n\n\n\n"
-qsnread=`cat $HOME/K8s-Lab-Questions/CKA_Lab1/questions/Q"${qsn_no}".txt`
+qsnread=`cat $HOME/K8s-Lab-Questions/CKA_Lab1/questions/Q"${qsn_no}".md`
 printf "${BOLD}${CYAN}${qsnread}${NONE}"
 echo -e "\n\n"
 echo -e "${BOLD}${confirm}${NONE}"
