@@ -9,6 +9,6 @@ do
 clustercount=`expr ${i} + 1`	
 getserverip=`cat /opt/K8sLab/Lab1/cluster"${clustercount}".config |grep -w "server" |awk -F '/' '{print $3}'`
 sed -i "s/${getserverip}/${getserverip}${clustercount}/g" /opt/K8sLab/Lab1/cluster"${clustercount}".config
-echo "${listfiles["$i"]}"
+#echo "${listfiles["$i"]}"
 done
 
