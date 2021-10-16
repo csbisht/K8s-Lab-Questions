@@ -49,14 +49,15 @@ fi
 
 labcaseifno () {
 if [ "${ANS}" = "no" ]; then
-#clear
+clear
 echo -e "\n\n\n\n"
 printf "${BOLD}${CYAN}${qsnread}${NONE}"
 echo -e "\n\n"
 echo -e "${BOLD}${confirm}${NONE}"
 echo -e "${BOLD}${nextq}${NONE}"
 read ANS
-labcase
+#labcase
+labrun
 fi	
 }	
 
@@ -70,7 +71,7 @@ case "$ANS" in
 	  echo "Please wait...";
 	  sleep 3;
    ;;
-   "no") #clear;
+   "no") clear;
 	 echo -e "\n\n"
 	 echo -e "${BOLD}${CYAN}OK! we will wait...${NONE} \n";
 	 sleep 3;
@@ -85,7 +86,7 @@ case "$ANS" in
 questionlst=( `ls $HOME/K8s-Lab-Questions/CKA_Lab1/questions` )
 
 labrun () {
-#clear
+clear
 echo -e "\n\n\n\n"
 qsnread=`cat $HOME/K8s-Lab-Questions/CKA_Lab1/questions/Q"${qsn_no}".md`
 printf "${BOLD}${CYAN}${qsnread}${NONE}"
