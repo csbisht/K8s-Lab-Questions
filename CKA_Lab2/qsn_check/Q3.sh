@@ -1,32 +1,40 @@
 #!/bin/bash
 
-deploymentname="web-c"
-clstnum=`echo "${1}" |cut -d'r' -f2`
-imagename="nginx:1.17"
+podname="test-pod"
+sleeptime="4800"
+systime="SYS_TIME"
+netadmin="NET_ADMIN"
 
-checkrecord=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config rollout history deployment/"${deploymentname}""${clstnum}" |grep -w "nginx=${imagename}"`
+
+checkpod=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get pod "$podname" |grep -w "$podname"`
+out3="$?"
+
+if [ "${out3}" = 0 ]; then
+check1=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get pod "$podname" -o jsonpath='{.spec.containers[*].command}' |grep -w "$sleeptime"`
 out1="$?"
 
-checkimage=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get deployment "${deploymentname}""${clstnum}" -o yaml |grep -w "image: ${imagename}"`
+if [ "${out1}" = 0 ]; then
+check2=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get pod "$podname" -o jsonpath='{.spec.containers[*].securityContext.capabilities.add}' |grep -w "$systime"`
 out2="$?"
-
-checkreplica=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get pods |grep "${deploymentname}${clstnum}" |wc -l`
-
-checkdeployment=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get deployment "${deploymentname}""${clstnum}"`
-out4="$?"
-
-if [ "${out4}" = 0 ]; then
-if [ "${out1}" -gt 0 ] && [ "${out2}" -gt 0 ]; then
-echo "rollout history or deploy image not found"
+if [ "${out2}" = 0 ]; then
+checknetadmin=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get pod "$podname" -o jsonpath='{.spec.containers[*].securityContext.capabilities.add}' |grep -w "$netadmin"`
+out2_3="$?"
+if [ "${out2_3}" -gt 0 ]; then
+echo "capabilities NET_ADMIN not found in pod"
 out3="1"
 else
-#echo "rollout history or deploy image found or replicas scaled to 3"	
-if [ "${checkreplica}" -lt 3 ]; then
-echo "replicas not scaled to 3"
-out3="1"
-fi
+echo "capabilities found in pod"
+out3="0"	
 fi
 else
-echo "deployment "${deploymentname}""${clastnum}" not found on "$1""
+echo "capabilities SYS_TIME not found in pod"
 out3="1"
+fi
+else	
+echo "command not found in pod"
+out3="1"
+fi
+
+else
+echo "pod "$podname" not found on "$1""
 fi

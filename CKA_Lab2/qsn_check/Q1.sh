@@ -1,22 +1,32 @@
 #!/bin/bash
 
-podname="admin-pod"
-sleeptime="3500"
-systime="SYS_TIME"
+deploymentname="web-00"
+clstnum=`echo "${1}" |cut -d'r' -f2`
+imagename="nginx:1.18"
 
-check1=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get pod "$podname" -o jsonpath='{.spec.containers[*].command}' |grep -w "$sleeptime"`
+checkrecord=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config rollout history deployment/"${deploymentname}""${clstnum}" |grep -w "nginx=${imagename}"`
 out1="$?"
 
-check2=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get pod "$podname" -o jsonpath='{.spec.containers[*].securityContext.capabilities.add}' |grep -w "$systime"`
+checkimage=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get deployment "${deploymentname}""${clstnum}" -o yaml |grep -w "image: ${imagename}"`
 out2="$?"
 
-checkpod=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get pod "$podname" |grep -w "$podname"`
-out3="$?"
+checkreplica=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get pods |grep "${deploymentname}${clstnum}" |wc -l`
 
-if [ "${out3}" = 0 ]; then
+checkdeployment=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get deployment "${deploymentname}""${clstnum}"`
+out4="$?"
+
+if [ "${out4}" = 0 ]; then
 if [ "${out1}" -gt 0 ] && [ "${out2}" -gt 0 ]; then
-echo "command or capabilities not found in pod"
+echo "rollout history or deploy image not found"
+out3="1"
+else
+#echo "rollout history or deploy image found or replicas scaled to 3"	
+if [ "${checkreplica}" -lt 3 ]; then
+echo "replicas not scaled to 3"
+out3="1"
+fi
 fi
 else
-echo "pod "$podname" not found on "$1""
+echo "deployment "${deploymentname}""${clastnum}" not found on "$1""
+out3="1"
 fi
