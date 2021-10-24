@@ -5,7 +5,7 @@ grpname="fsGroup"
 asusername="runAsUser"
 asgrpname="runAsGroup"
 
-checkpod=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get pod "$podname" &> /dev/null`
+checkpod=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get pod "$podname" 2> /dev/null`
 out3="$?"
 
 if [ "${out3}" = 0 ]; then

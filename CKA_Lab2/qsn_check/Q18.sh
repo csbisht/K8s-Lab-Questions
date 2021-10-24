@@ -5,7 +5,7 @@ usrname="chan"
 clstnum=`echo ${1} |cut -d'r' -f2`
 
 
-checkgetpod=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get pods -n "$namespace" --as "$usrname""$clstnum" &> /dev/null`
+checkgetpod=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get pods -n "$namespace" --as "$usrname""$clstnum" 2> /dev/null`
 out3="$?"
 
 if [ ${out3} = 0 ]; then
