@@ -4,7 +4,7 @@ podname="nginx-pvc-pod"
 clstnum=`echo ${1} |cut -d'r' -f2`
 
 
-checkpod=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get pod "$podname""$clstnum" &> /dev/null`
+checkpod=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get pod "$podname""$clstnum" 2> /dev/null`
 out3="$?"
 
 if [ ${out3} = 0 ]; then
