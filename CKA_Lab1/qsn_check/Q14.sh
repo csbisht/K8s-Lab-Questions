@@ -4,7 +4,7 @@ podname="audit-web-app"
 svcname="audit-web-app-svc"
 
 
-checksvc=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get svc "$svcname" &2> /dev/null`
+checksvc=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get svc "$svcname" 2> /dev/null`
 out3="$?"
 
 if [ "${out3}" = 0 ]; then
