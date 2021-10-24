@@ -4,7 +4,7 @@ podname1="nginx-dev"
 podname2="nginx-prod"
 
 
-checkpod=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get pod "$podname2" 2> /dev/null`
+checkpod=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get pod "$podname2" &2> /dev/null`
 out3="$?"
 
 if [ "${out3}" = 0 ]; then
