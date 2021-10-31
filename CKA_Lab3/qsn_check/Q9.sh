@@ -12,7 +12,7 @@ checkpodstat=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"
 out1="$?"
 
 if [ ${out1} = 0 ]; then
-checkpodmnt=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get pod "$podname""$clstnum" -o jsonpath='{.spec.containers[*].volumeMounts[?(@.mountPath == "/var/log/nginx")]}' |grep -w "/var/log/nginx"`
+checkpodmnt=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get pod "$podname""$clstnum" -o jsonpath='{.spec.volumes[*].hostPath.path}' |grep -w "/tmp/nginx"`
 out2="$?"
 
 if [ ${out2} -gt 0 ]; then
