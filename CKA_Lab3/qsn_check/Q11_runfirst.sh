@@ -19,7 +19,7 @@ echo "$text" >/tmp/pod-web-serv.txt
 
 for i in ${clusterlist[@]}
 do
-scp -o "StrictHostKeyChecking no" /tmp/pod-web-serv.txt "$i"-controlplane:/tmp/pod-web-serv.yaml 
+scp -o "StrictHostKeyChecking no" /tmp/pod-web-serv.txt "$i"-controlplane:/tmp/pod-web-serv.yaml &> /dev/null 
 ssh -o "StrictHostKeyChecking no" "$i"-controlplane "sudo cp /tmp/pod-web-serv.yaml /etc/kubernetes/manifests/pod-web-serv.yaml"
 done	
 
