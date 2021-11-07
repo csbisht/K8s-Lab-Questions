@@ -11,7 +11,7 @@ out3="$?"
 if [ "${out3}" = 0 ]; then
 
 if [ -f "${filelocation}"/"${podname}"-"${1}".pod ]; then
-checkpod=`cat "${filelocation}"/"${podname}"-"${1}".pod |grep -w web-app-svc.default.svc.cluster.local`
+checkpod=`cat "${filelocation}"/"${podname}"-"${1}".pod |grep -w default.pod.cluster.local`
 out1="$?"
 
 if [ "${out1}" = 0 ]; then
