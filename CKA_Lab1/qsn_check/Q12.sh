@@ -9,6 +9,7 @@ checksvc=`cat "${filelocation}"/"${podname}"-"${1}".svc |grep -w web-app-svc.def
 out3="$?"
 
 if [ "${out3}" = 0 ]; then
+
 if [ -f "${filelocation}"/"${podname}"-"${1}".pod ]; then
 checkpod=`cat "${filelocation}"/"${podname}"-"${1}".pod |grep -w web-app-svc.default.svc.cluster.local`
 out1="$?"
@@ -22,9 +23,13 @@ out3="1"
 fi
 
 else
-echo "file "${filelocation}"/"${podname}"-"${1}".svc output not matched"
+echo "file "${filelocation}"/"${podname}"-"${1}".pod output not matched"
 out3="1"
 fi
+
+else
+echo "file "${filelocation}"/"${podname}"-"${1}".svc output not matched"
+out3="1"
 fi
 
 else
