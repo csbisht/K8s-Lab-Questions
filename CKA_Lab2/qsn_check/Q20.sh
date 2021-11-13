@@ -6,16 +6,46 @@ clstnum=`echo ${1} |cut -d'r' -f2`
 
 
 if [ -f "$filepath"/"$filename""$clstnum"_List ]; then
-gethost_ip=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get node "$1"-controlplane -o=jsonpath='{.status.addresses[?(@.type=="Hostname")].address} {.status.addresses[?(@.type=="InternalIP")].address}'`
+gethost_master=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get node "$1"-controlplane -o=jsonpath='{.status.addresses[?(@.type=="Hostname")].address}'`
 
-checkfile=`cat "$filepath"/"$filename""$clstnum"_List |grep -w "$gethost_ip"`
+checkfile=`cat "$filepath"/"$filename""$clstnum"_List |grep -w "$gethost_master"`
 out3="$?"
-if [ ${out3} -gt 0 ]; then
-echo "file "$filepath"/"$filename""$clstnum"_List output not matched"
+if [ ${out3} = 0 ]; then
+getmaster_ip=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get node "$1"-controlplane -o=jsonpath='{.status.addresses[?(@.type=="InternalIP")].address}'`
+checkfile=`cat "$filepath"/"$filename""$clstnum"_List |grep -w "$getmaster_ip"`
+out2="$?"
+
+if [ ${out2} = 0 ]; then
+gethost_node0=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get node "$1"-node0 -o=jsonpath='{.status.addresses[?(@.type=="Hostname")].address}'`
+checkfile=`cat "$filepath"/"$filename""$clstnum"_List |grep -w "$gethost_node0"`
+out1="$?"
+
+if [ ${out1} = 0 ]; then
+getnode0_ip=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get node "$1"-node0 -o=jsonpath='{.status.addresses[?(@.type=="InternalIP")].address}'`
+checkfile=`cat "$filepath"/"$filename""$clstnum"_List |grep -w "$getnode0_ip"`
+out4="$?"
+
+if [ ${out4} -gt 0 ]; then
+echo "node "$1"-node0 InternalIP not matched in file "$filepath"/"$filename""$clstnum"_List"
 out3="1"
 else
-echo "file "$filepath"/"$filename""$clstnum"_List output matched"
+echo "node "$1"-node0 InternalIP matched in file "$filepath"/"$filename""$clstnum"_List"
 out3="0"
+fi
+
+else
+echo "node "$1"-node0 Hostname not matched in file "$filepath"/"$filename""$clstnum"_List"
+out3="1"
+fi	
+
+else
+echo "node "$1"-controlplane InternalIP not matched in file "$filepath"/"$filename""$clstnum"_List"
+out3="1"
+fi
+
+else
+echo "node "$1"-controlplane Hostname not matched in file "$filepath"/"$filename""$clstnum"_List"
+out3="1"
 fi
 
 else
