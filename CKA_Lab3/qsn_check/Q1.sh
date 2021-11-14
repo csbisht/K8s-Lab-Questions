@@ -9,11 +9,11 @@ checkgetingress=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfi
 out3="$?"
 
 if [ ${out3} = 0 ]; then
-checkverbs=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config describe role -n "$namespace" |grep -w "ingresses.extensions" |grep -w get |grep -w list`
+checkverbs=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config describe role -n "$namespace" |grep -w "ingresses" |grep -w get |grep -w list`
 out2="$?"
 
 if [ ${out2} = 0 ]; then
-checkverbs1=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config describe role -n "$namespace" |grep -w "networkpolicies.networking.k8s.io" |grep -w get |grep -w list`
+checkverbs1=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config describe role -n "$namespace" |grep -w "networkpolicies" |grep -w get |grep -w list`
 out1="$?"
 
 if [ ${out1} -gt 0 ]; then
