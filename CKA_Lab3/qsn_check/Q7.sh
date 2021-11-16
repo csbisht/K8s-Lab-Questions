@@ -1,7 +1,7 @@
 #!/bin/bash
 
 poddev="redis-dev"
-podstg="redis-sta"
+podstg="redis-stag"
 podprod="redis-prod"
 cmname="redisconf"
 
