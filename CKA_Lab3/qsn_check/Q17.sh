@@ -9,7 +9,7 @@ checkpod=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".
 out3="$?"
 
 if [ "${out3}" = 0 ]; then
-checklabel=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get  pods --show-labels |grep -w "$labelrm"`
+checklabel=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get  pods "$podname""$clstnum" --show-labels |awk '{print $6}' |grep -w "$labelrm"`
 out1="$?"	
 
 if [ "${out1}" -gt 0 ]; then
