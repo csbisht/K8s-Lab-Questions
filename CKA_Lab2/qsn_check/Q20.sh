@@ -16,25 +16,25 @@ checkfile=`cat "$filepath"/"$filename""$clstnum"_List |grep -w "$getmaster_ip"`
 out2="$?"
 
 if [ ${out2} = 0 ]; then
-gethost_node0=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get node "$1"-node0 -o=jsonpath='{.status.addresses[?(@.type=="Hostname")].address}'`
-checkfile=`cat "$filepath"/"$filename""$clstnum"_List |grep -w "$gethost_node0"`
+gethost_controlplane=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get node "$1"-controlplane -o=jsonpath='{.status.addresses[?(@.type=="Hostname")].address}'`
+checkfile=`cat "$filepath"/"$filename""$clstnum"_List |grep -w "$gethost_controlplane"`
 out1="$?"
 
 if [ ${out1} = 0 ]; then
-getnode0_ip=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get node "$1"-node0 -o=jsonpath='{.status.addresses[?(@.type=="InternalIP")].address}'`
-checkfile=`cat "$filepath"/"$filename""$clstnum"_List |grep -w "$getnode0_ip"`
+getcontrolplane_ip=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get node "$1"-controlplane -o=jsonpath='{.status.addresses[?(@.type=="InternalIP")].address}'`
+checkfile=`cat "$filepath"/"$filename""$clstnum"_List |grep -w "$getcontrolplane_ip"`
 out4="$?"
 
 if [ ${out4} -gt 0 ]; then
-echo "node "$1"-node0 InternalIP not matched in file "$filepath"/"$filename""$clstnum"_List"
+echo "node "$1"-controlplane InternalIP not matched in file "$filepath"/"$filename""$clstnum"_List"
 out3="1"
 else
-echo "node "$1"-node0 InternalIP matched in file "$filepath"/"$filename""$clstnum"_List"
+echo "node "$1"-controlplane InternalIP matched in file "$filepath"/"$filename""$clstnum"_List"
 out3="0"
 fi
 
 else
-echo "node "$1"-node0 Hostname not matched in file "$filepath"/"$filename""$clstnum"_List"
+echo "node "$1"-controlplane Hostname not matched in file "$filepath"/"$filename""$clstnum"_List"
 out3="1"
 fi	
 
