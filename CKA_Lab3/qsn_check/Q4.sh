@@ -4,16 +4,16 @@ deploymentname="nginx-web"
 clstnum=`echo "${1}" |cut -d'r' -f2`
 imagename="nginx:1.19"
 filename="Rollout_history_cluster"
-filepath="/opt/K8sLab/Lab"
+filepath="/opt/K8sLab/Lab3"
 
 checkdeployment=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get deployment "${deploymentname}""${clstnum}"`
 out3="$?"
 
 if [ "${out3}" = 0 ]; then
 
-if [ -f "$filepath""${clstnum}"/"$filename""${clstnum}".txt ]; then
+if [ -f "$filepath"/"$filename""${clstnum}".txt ]; then
 gethistory=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config rollout history deployment "${deploymentname}""${clstnum}" |sed '1,2d' |awk {'print $1'}`
-catfile=`cat "$filepath""${clstnum}"/"$filename""${clstnum}".txt |sed '1,2d' |awk {'print $1'}`
+catfile=`cat "$filepath"/"$filename""${clstnum}".txt |sed '1,2d' |awk {'print $1'}`
 if [ "$gethistory" = "$catfile" ]; then
 
 checkimage=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get deployment "${deploymentname}""${clstnum}" -o yaml |grep -w "image: ${imagename}"`
@@ -33,11 +33,13 @@ out3="1"
 fi
 
 else
-echo "Rollout history not matched with file "$filepath""${clstnum}"/"$filename""${clstnum}".txt"
+echo "Rollout history not matched with file "$filepath"/"$filename""${clstnum}".txt"
+out3="1"
 fi
 
 else
-echo "file "$filepath""${clstnum}"/"$filename""${clstnum}".txt not found on "$1""
+echo "file "$filepath"/"$filename""${clstnum}".txt not found on "$1""
+out3="1"
 fi
 
 else
