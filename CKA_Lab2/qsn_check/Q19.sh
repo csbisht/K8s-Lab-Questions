@@ -15,15 +15,8 @@ if [ ${out1} = 0 ]; then
 checkpodmnt=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get pod "$podname""$clstnum" -o jsonpath='{.spec.containers[*].volumeMounts[?(@.mountPath == "/log")]}' |grep -w "/log"`
 out2="$?"
 if [ ${out2} = 0 ]; then
-checkmntsize=`/usr/bin/kubectl --kubeconfig=$HOME/K8s-Lab-Questions/kubeconfig/"$1".config get pvc pvc"$clstnum"-log -o jsonpath='{.spec.resources.requests.storage}' |grep 50Mi`
-out1="$?"
-if [ ${out1} = 0 ]; then
-echo "Storage Request size also correct on pod "$podname""$clstnum" in "$1""
-out3="0"
-else
-echo "Storage Request size not correct on pod "$podname""$clstnum" in "$1""
-out3="1"
-fi	
+echo "mount path on pod "$podname""$clstnum" is correct on "$1""
+out3="0"	
 else
 echo "mount path on pod "$podname""$clstnum" is not correct on "$1""
 out3="1"
