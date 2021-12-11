@@ -13,6 +13,7 @@ ssh -o "StrictHostKeyChecking no" "$i"-node0 "sudo grep -w "ca.crt" /var/lib/kub
 out1="$?"
 if [ "${out1}" = 0 ]; then
 ssh -o "StrictHostKeyChecking no" "$i"-node0 "sudo sed -i 's/ca.crt/ca.cert/g' /var/lib/kubelet/config.yaml"
+sleep 40
 fi
 
 fi
@@ -24,6 +25,7 @@ ssh -o "StrictHostKeyChecking no" "$i"-node0 "sudo grep -w "ca.crt" /var/lib/kub
 out1="$?"
 if [ "${out1}" = 0 ]; then
 ssh -o "StrictHostKeyChecking no" "$i"-node0 "sudo sed -i 's/ca.crt/CA.crt/g' /var/lib/kubelet/config.yaml"
+sleep 10
 fi
 fi
 
@@ -34,6 +36,7 @@ ssh -o "StrictHostKeyChecking no" "$i"-node0 "sudo grep -w "pki" /var/lib/kubele
 out1="$?"
 if [ "${out1}" = 0 ]; then
 ssh -o "StrictHostKeyChecking no" "$i"-node0 "sudo sed -i 's/pki/pKi/g' /var/lib/kubelet/config.yaml"
+sleep 10
 fi
 fi
 
